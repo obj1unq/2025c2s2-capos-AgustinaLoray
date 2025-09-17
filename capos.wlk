@@ -55,9 +55,67 @@ object rolando {
         return hogarActual.espacioEnElCastilloDePiedra().map({artefacto => artefacto.poderDelArtefacto()}).max()
       
     }
+
+    method enemigosQuePuedoVencer() {
+        const enemigos = [caterina, archibaldo, astra]
+        return enemigos.filter({enemigo => self.poderDePelea() > enemigo.poderDePelea()})
+    }
+
+    method moradasConquistables() {
+        const enemigosQueVenci = self.enemigosQuePuedoVencer()
+        return enemigosQueVenci.map({enemigo => enemigo.morada()})
+      
+    }
+
+    method soyPoderoso() {
+        return self.enemigosQuePuedoVencer().size() >= 3
+      
+    }
+
+    method esArtefactoFatal(artefacto, enemigo) {
+        return artefacto.poderDelArtefacto() + self.poderBase() > enemigo.poderDePelea()
+    }
+
+    method tengoUnArtefactoFatalPara(enemigo) {
+        return mochila.any({artefacto => self.esArtefactoFatal(artefacto, enemigo)})
+    
+    }
+
+    method artefactoFatalPara(enemigo) {
+        return mochila.find({artefacto => self.esArtefactoFatal(artefacto, enemigo) })
+    }
+
+
 }
 
+object caterina {
+    var property poderDePelea = 28
+    var property morada = fortalezaDeAcero 
+}
 
+object archibaldo {
+    var property poderDePelea = 16
+    var property morada = palacioDeMarmol  
+  
+}
+
+object astra {
+    var property poderDePelea = 14
+    var property morada = torreDeMarfil
+  
+}
+
+object fortalezaDeAcero {
+  
+}
+
+object palacioDeMarmol {
+  
+}
+
+object torreDeMarfil {
+  
+}
 object espadaDelDestino {
     const dueño = rolando
     var vecesQueSeUso = 0
