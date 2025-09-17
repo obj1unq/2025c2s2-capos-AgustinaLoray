@@ -1,0 +1,34 @@
+import capos.*
+
+describe "Rolando tests" {
+
+    method initialize() {
+        rolando.poderBase(5)
+        rolando.capacidadDeLaMochila(3)
+        rolando.encontreUnArtefacto(espadaDelDestino)
+        rolando.encontreUnArtefacto(armaduraDeAceroValyrio)
+        rolando.encontreUnArtefacto(collarDivino)
+    }
+  test "rolando" {
+        assert.equals(5, rolando.poderBase())
+        assert.equals(5, espadaDelDestino.poderDelArtefacto())
+        assert.equals(6, armaduraDeAceroValyrio.poderDelArtefacto())
+        assert.equals(3, collarDivino.poderDelArtefacto())
+        assert.equals(19, rolando.poderDePelea())
+        rolando.seLuchaUnaBatalla()
+        assert.equals(6, rolando.poderBase())
+        assert.equals(3, espadaDelDestino.poderDelArtefacto())
+        assert.equals(6, armaduraDeAceroValyrio.poderDelArtefacto())
+        assert.equals(3, collarDivino.poderDelArtefacto())
+        rolando.seLuchaUnaBatalla()
+        assert.equals(7, rolando.poderBase())
+        assert.equals(3.5, espadaDelDestino.poderDelArtefacto())
+        assert.equals(6, armaduraDeAceroValyrio.poderDelArtefacto())
+        assert.equals(5, collarDivino.poderDelArtefacto())
+        rolando.seLuchaUnaBatalla()
+        assert.equals(8, rolando.poderBase())
+        assert.equals(4, espadaDelDestino.poderDelArtefacto())
+        assert.equals(6, armaduraDeAceroValyrio.poderDelArtefacto())
+        assert.equals(6, collarDivino.poderDelArtefacto())
+  }
+}

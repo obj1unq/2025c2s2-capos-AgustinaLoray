@@ -1,9 +1,11 @@
 object rolando {
     const mochila = []
-    var capacidadDeLaMochila = 2
+    var property capacidadDeLaMochila = null 
     var estaEnCastillo = null
     var hogarActual = castilloDePiedra
     const historialDeArtefactosVistos = []
+    var property poderBase = null
+    var property historialDeBatalla = null
 
     method encontreUnArtefacto(artefacto) {
         historialDeArtefactosVistos.add(artefacto)
@@ -39,23 +41,84 @@ object rolando {
       
     }
 
+    method seLuchaUnaBatalla() {
+        historialDeBatalla = 1
+        poderBase = poderBase + 1
+        mochila.forEach({artefacto => artefacto.incrementarUso()})
+    }
+
+    method poderDePelea() {
+    return poderBase + mochila.map({artefacto => artefacto.poderDelArtefacto()}).sum()
+
+      
+    }
 }
 
 
 object espadaDelDestino {
+    var dueño = rolando
+    var vecesQueSeUso = 0
 
+    method poderDelArtefacto() {
+      if (dueño.historialDeBatalla() == 1) {
+        return dueño.poderBase() / 2
+    } else { 
+        return dueño.poderBase() 
+    } 
+   }
+
+    method incrementarUso() {
+    vecesQueSeUso = vecesQueSeUso + 1
+     
+   }
+   
 }
 
 object libroDeHechizos {
+    var property poder = 0 
+    var dueño = rolando
+    var vecesQueSeUso = 0
+
+    method incrementarUso() {
+        vecesQueSeUso = vecesQueSeUso + 1
+     
+   }
+
+    method poderDelArtefacto () {
+   }
   
 }
 
-object collarDivino {
-  
+object collarDivino { 
+    var property poder = 3
+    var dueño = rolando
+    var vecesQueSeUso = 0 
+
+    method poderDelArtefacto() {
+        if (dueño.poderBase() > 6) 
+            {return poder + vecesQueSeUso}
+        else {return 3 }
+    } 
+
+    method incrementarUso() {
+        vecesQueSeUso = vecesQueSeUso + 1
+     
+   }
 }
 
 object armaduraDeAceroValyrio {
-  
+    var dueño = rolando
+    var vecesQueSeUso = 0
+
+    method incrementarUso() {
+        vecesQueSeUso = vecesQueSeUso + 1
+   }
+
+    method poderDelArtefacto() {
+        return 6
+     
+   }
+
 }
 
 object castilloDePiedra {
