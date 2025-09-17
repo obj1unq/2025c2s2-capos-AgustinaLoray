@@ -52,9 +52,7 @@ describe "libro test" {
        assert.equals(6, libroDeHechizos.poderDelArtefacto())
        rolando.seLuchaUnaBatalla()
        assert.equals(7, libroDeHechizos.poderDelArtefacto())
-        
-
-
-
+       rolando.seLuchaUnaBatalla()
+       assert.equals(0, libroDeHechizos.poderDelArtefacto())
   }
 }

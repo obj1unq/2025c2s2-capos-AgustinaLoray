@@ -2,10 +2,10 @@ object rolando {
     const mochila = []
     var property capacidadDeLaMochila = null 
     var estaEnCastillo = null
-    var hogarActual = castilloDePiedra
+    const hogarActual = castilloDePiedra
     const historialDeArtefactosVistos = []
-    var property poderBase = null
-    var property historialDeBatalla = null
+    var property poderBase = 0
+    var property historialDeBatalla = 0
 
     method encontreUnArtefacto(artefacto) {
         historialDeArtefactosVistos.add(artefacto)
@@ -59,7 +59,7 @@ object rolando {
 
 
 object espadaDelDestino {
-    var dueño = rolando
+    const dueño = rolando
     var vecesQueSeUso = 0
 
     method poderDelArtefacto() {
@@ -79,7 +79,6 @@ object espadaDelDestino {
 
 object libroDeHechizos {
     var property poder = 0 
-    var dueño = rolando
     var vecesQueSeUso = 0
     var property hechizos = []
 
@@ -105,7 +104,7 @@ object hechizoBendicion {
 }
 
 object hechizosInvisibilidad {
-    var personajeQueLoUsa = rolando 
+    const personajeQueLoUsa = rolando 
 
     method poderQueAporta() {
         return personajeQueLoUsa.poderBase()
@@ -113,7 +112,7 @@ object hechizosInvisibilidad {
 }
 
 object hechizoInvocacion {
-    var personajeQueLoUsa = rolando
+    const personajeQueLoUsa = rolando
 
     method poderQueAporta() {
         return personajeQueLoUsa.artefactoMasPoderosoEnMiHogar()
@@ -123,7 +122,7 @@ object hechizoInvocacion {
 
 object collarDivino { 
     var property poder = 3
-    var dueño = rolando
+    const dueño = rolando
     var vecesQueSeUso = 0 
 
     method poderDelArtefacto() {
@@ -139,7 +138,6 @@ object collarDivino {
 }
 
 object armaduraDeAceroValyrio {
-    var dueño = rolando
     var vecesQueSeUso = 0
 
     method incrementarUso() {
