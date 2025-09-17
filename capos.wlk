@@ -42,14 +42,17 @@ object rolando {
     }
 
     method seLuchaUnaBatalla() {
-        historialDeBatalla = 1
+        historialDeBatalla += 1
         poderBase = poderBase + 1
         mochila.forEach({artefacto => artefacto.incrementarUso()})
     }
 
     method poderDePelea() {
-    return poderBase + mochila.map({artefacto => artefacto.poderDelArtefacto()}).sum()
+        return poderBase + mochila.map({artefacto => artefacto.poderDelArtefacto()}).sum()
+    }
 
+    method artefactoMasPoderosoEnMiHogar() {
+        return hogarActual.espacioEnElCastilloDePiedra().map({artefacto => artefacto.poderDelArtefacto()}).max()
       
     }
 }
@@ -78,14 +81,43 @@ object libroDeHechizos {
     var property poder = 0 
     var dueño = rolando
     var vecesQueSeUso = 0
+    var property hechizos = []
 
     method incrementarUso() {
         vecesQueSeUso = vecesQueSeUso + 1
-     
-   }
+        hechizos = hechizos.drop(1)
+
+    }
 
     method poderDelArtefacto () {
-   }
+        if (hechizos.isEmpty())
+            {return 0}
+        else { return hechizos.head().poderQueAporta() }
+    }
+  
+}
+
+object hechizoBendicion {
+
+    method poderQueAporta() {
+        return 4 
+    } 
+}
+
+object hechizosInvisibilidad {
+    var personajeQueLoUsa = rolando 
+
+    method poderQueAporta() {
+        return personajeQueLoUsa.poderBase()
+    }
+}
+
+object hechizoInvocacion {
+    var personajeQueLoUsa = rolando
+
+    method poderQueAporta() {
+        return personajeQueLoUsa.artefactoMasPoderosoEnMiHogar()
+    }
   
 }
 
@@ -122,7 +154,7 @@ object armaduraDeAceroValyrio {
 }
 
 object castilloDePiedra {
-    const espacioEnElCastilloDePiedra = []
+    const property espacioEnElCastilloDePiedra = []
 
     method guardarArtefactos(listaDeArtefactos) {
       espacioEnElCastilloDePiedra.addAll(listaDeArtefactos)
@@ -131,5 +163,8 @@ object castilloDePiedra {
     method queTengoEnElCastillo() {
         return espacioEnElCastilloDePiedra
     }
+
+
+
 }
 
